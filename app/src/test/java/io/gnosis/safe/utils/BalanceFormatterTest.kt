@@ -162,7 +162,7 @@ class BalanceFormatterTest {
         val actual = balanceFormatter.fiatBalanceWithCurrency(input, "EUR")
         val expected = "1.000 €"
 
-        assertEquals(expected, actual)
+        assertEquals(expected, actual.replace(" ", " "))
     }
 
     @Test
@@ -174,32 +174,32 @@ class BalanceFormatterTest {
         // 5 decimals till 1k
         val value1 = BigDecimal.valueOf(0.123456789)
         val fiatAmount1 = balanceFormatter.fiatBalanceWithCurrency(value1, "EUR")
-        assertEquals("0,12345 €", fiatAmount1)
+        assertEquals("0,12345 €", fiatAmount1.replace(" ", " "))
 
         // 4 decimals till 10k
         val value2 = BigDecimal.valueOf(1000.123456789)
         val fiatAmount2 = balanceFormatter.fiatBalanceWithCurrency(value2, "EUR")
-        assertEquals("1.000,1234 €", fiatAmount2)
+        assertEquals("1.000,1234 €", fiatAmount2.replace(" ", " "))
 
         // 3 decimals till 100k
         val value3 = BigDecimal.valueOf(10_000.123456789)
         val fiatAmount3 = balanceFormatter.fiatBalanceWithCurrency(value3, "EUR")
-        assertEquals("10.000,123 €", fiatAmount3)
+        assertEquals("10.000,123 €", fiatAmount3.replace(" ", " "))
 
         // 2 decimals till 1M
         val value4 = BigDecimal.valueOf(100_000.123456789)
         val fiatAmount4 = balanceFormatter.fiatBalanceWithCurrency(value4, "EUR")
-        assertEquals("100.000,12 €", fiatAmount4)
+        assertEquals("100.000,12 €", fiatAmount4.replace(" ", " "))
 
         // 1 decimal till 10M
         val value5 = BigDecimal.valueOf(5_000_000.123456789)
         val fiatAmount5 = balanceFormatter.fiatBalanceWithCurrency(value5, "EUR")
-        assertEquals("5.000.000,1 €", fiatAmount5)
+        assertEquals("5.000.000,1 €", fiatAmount5.replace(" ", " "))
 
         // no decimals after 10M
         val value6 = BigDecimal.valueOf(15_000_000.123456789)
         val fiatAmount6 = balanceFormatter.fiatBalanceWithCurrency(value6, "EUR")
-        assertEquals("15.000.000 €", fiatAmount6)
+        assertEquals("15.000.000 €", fiatAmount6.replace(" ", " "))
     }
 
     @Test
@@ -210,34 +210,34 @@ class BalanceFormatterTest {
 
         val value1 = BigDecimal.valueOf(100_000_000.123456789)
         val fiatAmount1 = balanceFormatter.fiatBalanceWithCurrency(value1, "EUR")
-        assertEquals("100M €", fiatAmount1)
+        assertEquals("100M €", fiatAmount1.replace(" ", " "))
 
         val value2 = BigDecimal.valueOf(100_100_000.123456789)
-        val fiatAmount2 = balanceFormatter.fiatBalanceWithCurrency(value2,"EUR")
-        assertEquals("100,1M €", fiatAmount2)
+        val fiatAmount2 = balanceFormatter.fiatBalanceWithCurrency(value2, "EUR")
+        assertEquals("100,1M €", fiatAmount2.replace(" ", " "))
 
         val value3 = BigDecimal.valueOf(999_999_999.123456789)
         val fiatAmount3 = balanceFormatter.fiatBalanceWithCurrency(value3, "EUR")
-        assertEquals("999,999M €", fiatAmount3)
+        assertEquals("999,999M €", fiatAmount3.replace(" ", " "))
 
         val value4 = BigDecimal.valueOf(1_999_999_999.123456789)
         val fiatAmount4 = balanceFormatter.fiatBalanceWithCurrency(value4, "EUR")
-        assertEquals("1,999B €", fiatAmount4)
+        assertEquals("1,999B €", fiatAmount4.replace(" ", " "))
 
         val value5 = BigDecimal.valueOf(1_999_999_999_999.123456789)
         val fiatAmount5 = balanceFormatter.fiatBalanceWithCurrency(value5, "EUR")
-        assertEquals("1,999T €", fiatAmount5)
+        assertEquals("1,999T €", fiatAmount5.replace(" ", " "))
 
         val value6 = BigDecimal.valueOf(999_000_000_000_000)
         val fiatAmount6 = balanceFormatter.fiatBalanceWithCurrency(value6, "EUR")
-        assertEquals("999T €", fiatAmount6)
+        assertEquals("999T €", fiatAmount6.replace(" ", " "))
 
         val value7 = BigDecimal.valueOf(999_999_999_999_999.123456789)
         val fiatAmount7 = balanceFormatter.fiatBalanceWithCurrency(value7, "EUR")
-        assertEquals("999,999T €", fiatAmount7)
+        assertEquals("999,999T €", fiatAmount7.replace(" ", " "))
 
         val value8 = BigDecimal.valueOf(1_999_999_999_999_999.123456789)
         val fiatAmount8 = balanceFormatter.fiatBalanceWithCurrency(value8, "EUR")
-        assertEquals("> 999T €", fiatAmount8)
+        assertEquals("> 999T €", fiatAmount8.replace(" ", " "))
     }
 }
